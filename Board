@@ -1,0 +1,99 @@
+package javaguru;
+
+public class Board {
+
+        private int[][] field = new int[3][3];
+
+        public Board() {
+            clearBoard();
+        }
+
+        public void clearBoard() {
+            for (int line = 0; line < 3; line++)
+                for (int column = 0; column < 3; column++)
+                    field[line][column] = 0;
+        }
+
+        public void showBoard() {
+            System.out.println();
+            for (int line = 0; line < 3; line++) {
+
+                for (int column = 0; column < 3; column++) {
+
+                    if (field[line][column] == -1) {
+                        System.out.print(" X ");
+                    }
+                    if (field[line][column] == 1) {
+                        System.out.print(" O ");
+                    }
+                    if (field[line][column] == 0) {
+                        System.out.print("   ");
+                    }
+
+                    if (column == 0 || column == 1)
+                        System.out.print("|");
+                }
+                System.out.println();
+            }
+
+        }
+
+        public int getPosition(int[] attempt) {
+            return field[attempt[0]][attempt[1]];
+        }
+
+        public void setPosition(int[] attempt, int player) {
+            if (player == 1)
+                field[attempt[0]][attempt[1]] = -1;
+            else
+                field[attempt[0]][attempt[1]] = 1;
+        }
+
+        public int checkLines() {
+            for (int line = 0; line < 3; line++) {
+
+                if ((field[line][0] + field[line][1] + field[line][2]) == -3)
+                    return -1;
+                if ((field[line][0] + field[line][1] + field[line][2]) == 3)
+                    return 1;
+            }
+
+            return 0;
+
+        }
+
+        public int wonInColumns() {
+            for (int column = 0; column < 3; column++) {
+
+                if ((field[0][column] + field[1][column] + field[2][column]) == -3)
+                    return -1;
+                if ((field[0][column] + field[1][column] + field[2][column]) == 3)
+                    return 1;
+            }
+
+            return 0;
+
+        }
+
+        public int wonInDiagonals() {
+            if ((field[0][0] + field[1][1] + field[2][2]) == -3)
+                return -1;
+            if ((field[0][0] + field[1][1] + field[2][2]) == 3)
+                return 1;
+            if ((field[0][2] + field[1][1] + field[2][0]) == -3)
+                return -1;
+            if ((field[0][2] + field[1][1] + field[2][0]) == 3)
+                return 1;
+
+            return 0;
+        }
+
+        public boolean itsADraw() {
+            for (int line = 0; line < 3; line++)
+                for (int column = 0; column < 3; column++)
+                    if (field[line][column] == 0)
+                        return false;
+            return true;
+        }
+    }
+
