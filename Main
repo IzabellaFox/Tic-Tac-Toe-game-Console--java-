@@ -1,0 +1,13 @@
+package javaguru;
+
+public class Main {
+
+    public static  void main(String []args){
+        rules();
+        Game game = new Game();
+    }
+    private static void rules() { // вывод правил в начале
+        System.out.println("The goal of Tic Tac Toe is to be the first player to get three in a row on a 3x3 grid");
+        System.out.println("Write a number from line and column where you want to put your mark");
+    }
+}
